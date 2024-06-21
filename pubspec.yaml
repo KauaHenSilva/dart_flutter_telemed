@@ -35,6 +35,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  flutter_native_splash: ^2.4.0
 
 dev_dependencies:
   flutter_test:
@@ -46,6 +47,33 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
+
+# flutter pub run flutter_launcher_icons -f icon
+# flutter pub run flutter_launcher_icons
+flutter_launcher_icons:
+  android: "icon"
+  image_path: assets/logo/logo.png
+  min_sdk_android: 21 
+  web:
+    generate: true
+    image_path: assets/logo/logo.png
+
+# flutter pub run flutter_native_splash:create  
+flutter_native_splash:
+  image: assets/logos/logo.png
+  image_dark: assets/logos/logo.png
+  color: "#242733"
+  color_dark: "#242733"
+  android: true
+  web: true
+
+  android_12:
+    image: assets/logos/logo.png
+    image_dark: assets/logos/logo.png
+    color: "#ffffff"
+    icon_background_color: "#242733"
+    color_dark: "#242733"
+    icon_background_color_dark: "#242733"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -59,8 +87,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/logos/Logo_1240_Dark.png
+    - assets/logos/Logo_1240_light.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
