@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telemed/screens/home/home_navigation.dart';
 import 'package:telemed/screens/login_cadastro/cadastro.dart';
 import 'package:telemed/screens/login_cadastro/login.dart';
 import 'package:telemed/screens/login_cadastro/perfil.dart';
@@ -19,10 +20,11 @@ class MyApp extends StatelessWidget {
 			theme: ThemeData.light(),
 			darkTheme: ThemeData.dark(),
 			routes: {
-				MyRoutes.home: (ctx) => const Login(),
+				MyRoutes.home: (ctx) => const Cadastro(),
 				MyRoutes.cadastro : (ctx) => const Cadastro(),
 				MyRoutes.login : (ctx) => const Login(),
 				MyRoutes.perfil : (ctx) => const Perfil(),
+				MyRoutes.homenavigation : (ctx) => const HomePrincipal(),
 			},
 		);
 	}

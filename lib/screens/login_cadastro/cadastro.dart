@@ -20,9 +20,13 @@ class _CadastroState extends State<Cadastro> {
 		final sizeWidth = mediaQuery.size.width;
 
 		return Scaffold(
+			appBar: AppBar(
+				forceMaterialTransparency: true,
+				automaticallyImplyLeading: true,
+			),
 			backgroundColor: const Color.fromARGB(255,36,39,51),
 			body: SingleChildScrollView(
-				padding: EdgeInsets.only(top: sizeTop * 0.1,left: sizeWidth * 0.05,right: sizeWidth * 0.05),
+				padding: EdgeInsets.only(left: sizeWidth * 0.05,right: sizeWidth * 0.05),
 				child: Column(
 					children: [
 						Image.asset(
@@ -139,14 +143,14 @@ class _CadastroState extends State<Cadastro> {
 							mainAxisAlignment: MainAxisAlignment.center,
 							children: [
 								Image.asset(
-									"assets/images/facebook_icon.png",
+									"assets/icons/facebook_icon.png",
 									width: 50,
 									height: 50,
 								),
 								Padding(
 									padding: const EdgeInsets.only(left:35),
 									child: Image.asset(
-										"assets/images/google_icon.png",
+										"assets/icons/google_icon.png",
 										width: 50,
 										height: 50,
 									),
@@ -154,7 +158,7 @@ class _CadastroState extends State<Cadastro> {
 								Padding(
 									padding: const EdgeInsets.only(left:35),
 									child: Image.asset(
-										"assets/images/apple_icon.png",
+										"assets/icons/apple_icon.png",
 										width: 50,
 										height: 50,
 									),

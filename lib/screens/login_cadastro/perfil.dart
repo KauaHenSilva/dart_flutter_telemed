@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:telemed/utils/my_routes.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -38,6 +39,9 @@ class _PerfilState extends State<Perfil> {
 		final sizeWidth = mediaQuery.size.width;
 
 		return Scaffold(
+			appBar: AppBar(
+				forceMaterialTransparency: true,
+			),
 			backgroundColor: const Color.fromARGB(255,36,39,51),
 			body: Container(
 				margin: const EdgeInsets.all(5),
@@ -52,12 +56,16 @@ class _PerfilState extends State<Perfil> {
 									const CircleAvatar(
 										radius: 80,
 										backgroundColor: Color.fromARGB(255, 79, 79, 79),
-										backgroundImage: AssetImage(
-											"assets/images/people.png"
+										child: Icon(
+											Icons.person_outline,
+											size: 150,
+											color: Colors.grey,
 										),
 									),
 									IconButton(
-										onPressed: (){}, 
+										onPressed: (){
+											
+										}, 
 										icon: const Icon(Icons.edit),
 										style: const ButtonStyle(
 											backgroundColor: WidgetStatePropertyAll(
@@ -245,7 +253,10 @@ class _PerfilState extends State<Perfil> {
 							),
 							ElevatedButton(
 								onPressed: (){
-
+									Navigator.pushNamed(
+										context, 
+										MyRoutes.homenavigation
+									);
 								}, 
 								style: ButtonStyle(
 									backgroundColor: const WidgetStatePropertyAll(
