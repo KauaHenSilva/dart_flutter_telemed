@@ -40,6 +40,8 @@ dependencies:
   google_fonts: ^6.2.1
   flutter_launcher_icons: ^0.13.1
   flutter_svg: ^2.0.10+1
+  flutter_rating_bar: ^4.0.1
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
@@ -92,12 +94,26 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    # Logos
     - assets/logos/logo.png
+
+    # Medic
     - assets/medic/medic1.png
     - assets/medic/medic2.png
     - assets/medic/medic3.png
+
+    # Medic Fav
+    - assets/medic/medic_fav1.png
+    - assets/medic/medic_fav2.png
+    
+    # Medics
     - assets/medic/medics1.png
-  #   - images/a_dot_ham.jpeg
+
+    # notification
+    - assets/notification/cancel.png
+    - assets/notification/cronogram.png
+    - assets/notification/finance.png
+    - assets/notification/newService.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

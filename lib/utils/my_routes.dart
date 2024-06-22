@@ -1,5 +1,7 @@
 class MyRoutes {
-  static const String welcome = '/';
-  static const String home = '/home';
+  static const String home = '/';
+  static const String welcome = '/welcome';
   static const String init = '/init';
+  static const String favorite = '/favorite';
+  static const String notification = '/notification';
 }

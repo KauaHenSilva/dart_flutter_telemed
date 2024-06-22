@@ -33,6 +33,18 @@ class DrawerGlob extends StatelessWidget {
               Navigator.pushNamed(context, MyRoutes.welcome);
             },
           ),
+          ListTile(
+            title: const Text('Favorite'),
+            onTap: () {
+              Navigator.pushNamed(context, MyRoutes.favorite);
+            },
+          ),
+          ListTile(
+            title: const Text('Notification'),
+            onTap: () {
+              Navigator.pushNamed(context, MyRoutes.notification);
+            },
+          ),
         ],
       ),
     );
