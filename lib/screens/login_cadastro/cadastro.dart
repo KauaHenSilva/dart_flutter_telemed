@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:telemed/utils/my_routes.dart';
 
 class Cadastro extends StatefulWidget {
@@ -76,7 +75,7 @@ class _CadastroState extends State<Cadastro> {
 													borderRadius: BorderRadius.all(Radius.circular(10.0)),
 												),
 												enabledBorder: const OutlineInputBorder(
-													borderSide:const BorderSide(
+													borderSide: BorderSide(
 														color: Color.fromARGB(255, 47,51,68)
 													)
 												),

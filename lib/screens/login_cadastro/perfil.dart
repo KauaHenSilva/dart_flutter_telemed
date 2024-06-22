@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 class Perfil extends StatefulWidget {
   const Perfil({super.key});
@@ -20,17 +18,17 @@ class _PerfilState extends State<Perfil> {
 
 	Widget build(BuildContext context) {
 
-		Future<void> _selectData() async {
-			DateTime? _picked = await showDatePicker(
+		Future<void> selectData() async {
+			DateTime? picked = await showDatePicker(
 			context: context, 
 			initialDate: DateTime.now(),
 			firstDate: DateTime(2000), 
 			lastDate: DateTime(2100)
 			);
 
-			if(_picked != null){
+			if(picked != null){
 				setState(() {
-				  _dataEntrada.text = _picked.toString().split(" ")[0];
+				  _dataEntrada.text = picked.toString().split(" ")[0];
 				});
 			}
 		}
@@ -159,7 +157,7 @@ class _PerfilState extends State<Perfil> {
 										),
 										cursorColor: Colors.white,
 										onTap: (){
-											_selectData();
+											selectData();
 										},
 									),
 									const Padding(

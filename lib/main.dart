@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:telemed/screens/home/homePrincipal.dart';
-import 'package:telemed/screens/home_page.dart';
 import 'package:telemed/screens/login_cadastro/cadastro.dart';
 import 'package:telemed/screens/login_cadastro/login.dart';
 import 'package:telemed/screens/login_cadastro/perfil.dart';
