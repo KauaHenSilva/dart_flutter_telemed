@@ -36,6 +36,10 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   flutter_native_splash: ^2.4.0
+  smooth_page_indicator: ^1.1.0
+  google_fonts: ^6.2.1
+  flutter_launcher_icons: ^0.13.1
+  flutter_svg: ^2.0.10+1
 
 dev_dependencies:
   flutter_test:
@@ -52,11 +56,11 @@ dev_dependencies:
 # flutter pub run flutter_launcher_icons
 flutter_launcher_icons:
   android: "icon"
-  image_path: assets/logo/logo.png
+  image_path: assets/logos/logo.png
   min_sdk_android: 21 
   web:
     generate: true
-    image_path: assets/logo/logo.png
+    image_path: assets/logos/logo.png
 
 # flutter pub run flutter_native_splash:create  
 flutter_native_splash:
@@ -70,7 +74,7 @@ flutter_native_splash:
   android_12:
     image: assets/logos/logo.png
     image_dark: assets/logos/logo.png
-    color: "#ffffff"
+    color: "#242733"
     icon_background_color: "#242733"
     color_dark: "#242733"
     icon_background_color_dark: "#242733"
@@ -89,6 +93,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/logos/logo.png
+    - assets/medic/medic1.png
+    - assets/medic/medic2.png
+    - assets/medic/medic3.png
+    - assets/medic/medics1.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
