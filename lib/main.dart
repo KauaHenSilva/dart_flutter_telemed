@@ -4,8 +4,14 @@ import 'package:telemed/screens/login_cadastro/cadastro.dart';
 import 'package:telemed/screens/login_cadastro/login.dart';
 import 'package:telemed/screens/login_cadastro/perfil.dart';
 import 'package:telemed/utils/my_routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
