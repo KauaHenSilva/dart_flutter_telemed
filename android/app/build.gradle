@@ -26,8 +26,14 @@ if (flutterVersionName == null) {
     flutterVersionName = "1.0"
 }
 
+rootProject.ext {
+  set('FlutterFire', [
+    FirebaseSDKVersion: '29.3.1'
+  ])
+}
+
 android {
-    namespace = "com.example.telemed"
+    namespace = "com.telemed.tlm"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -38,7 +44,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.telemed"
+        applicationId = "com.telemed.tlm"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdk = flutter.minSdkVersion
