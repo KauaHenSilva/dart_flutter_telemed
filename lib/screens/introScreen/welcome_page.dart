@@ -22,7 +22,7 @@ class WelcomePage extends StatelessWidget {
                 image: const AssetImage(
                   "assets/medic/medics1.png",
                 ),
-                fit: BoxFit.fill,
+                fit: BoxFit.fitWidth,
                 height: size.height * 0.50,
                 width: double.infinity,
               ),

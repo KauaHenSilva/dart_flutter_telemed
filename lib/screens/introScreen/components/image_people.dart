@@ -22,7 +22,7 @@ class ImagePeople extends StatelessWidget {
             width: double.infinity,
             child: Image(
               image: AssetImage(image),
-              fit: BoxFit.fill,
+              fit: BoxFit.fitWidth,
             ),
           ),
         ),
