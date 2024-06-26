@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:telemed/screens/backend/auth.dart';
+import 'package:telemed/screens/backend/classes_app.dart';
+import 'package:telemed/screens/login_cadastro/perfil_page.dart';
 import 'package:telemed/utils/my_routes.dart';
 
 class Cadastro extends StatefulWidget {
@@ -10,10 +13,17 @@ class Cadastro extends StatefulWidget {
 
 class _CadastroState extends State<Cadastro> {
 	bool? _ocult = true;
+
 	IconData iconSenha = Icons.visibility_off;
+	final _formKey = GlobalKey<FormState>();
+
+	String? errorPassword;
+	String? errorEmail;
+
+	TextEditingController email = TextEditingController();
+	TextEditingController password = TextEditingController();
 
   	@override
-
   	Widget build(BuildContext context) {
 		final mediaQuery = MediaQuery.of(context);
 		final sizeTop = mediaQuery.size.height;
@@ -40,78 +50,82 @@ class _CadastroState extends State<Cadastro> {
 								fontSize: 30,
 							),
 						),
-						Padding(
-							padding: const EdgeInsets.only(top: 10),
-								child:  Column(
-									children: [
-										const TextField(
-											decoration: InputDecoration(
-												filled: true,
-												fillColor: Color.fromARGB(255, 47,51,68),
-												border: OutlineInputBorder(
-													borderRadius: BorderRadius.all(Radius.circular(10.0)),
-												),
-												enabledBorder: OutlineInputBorder(
-													borderSide:BorderSide(
-														color: Color.fromARGB(255, 47,51,68)
-													)
-												),
-												focusedBorder: OutlineInputBorder(
-													borderSide:BorderSide(
-														color: Color.fromARGB(255, 47,51,68)
-													)
-												),
-												prefixIcon: Icon(Icons.email),
-												prefixIconColor: Color.fromARGB(255, 20,57,190),
-												labelText: "E-mail",
+						Form(
+							key: _formKey,
+							child:  Column(
+								children: [
+									TextField(
+										controller: email,
+										decoration:  InputDecoration(
+											filled: true,
+											fillColor: const Color.fromARGB(255, 47,51,68),
+											border: const OutlineInputBorder(
+												borderRadius: BorderRadius.all(Radius.circular(10.0)),
 											),
-											
+											enabledBorder: const OutlineInputBorder(
+												borderSide:BorderSide(
+													color: Color.fromARGB(255, 47,51,68)
+												)
+											),
+											focusedBorder: const OutlineInputBorder(
+												borderSide:BorderSide(
+													color: Color.fromARGB(255, 47,51,68)
+												)
+											),
+											errorText: errorEmail,
+											prefixIcon: const Icon(Icons.email),
+											prefixIconColor: const Color.fromARGB(255, 20,57,190),
+											labelText: "E-mail",
 										),
 										
-										const Padding(padding: EdgeInsets.only(top: 10)),
+									),
+									
+									const Padding(padding: EdgeInsets.only(top: 10)),
 
-										TextField(
-											obscureText: _ocult!,
-											decoration: InputDecoration(
-												filled: true,
-												fillColor: const Color.fromARGB(255, 47,51,68),
-												border: const OutlineInputBorder(
-													borderRadius: BorderRadius.all(Radius.circular(10.0)),
-												),
-												enabledBorder: const OutlineInputBorder(
-													borderSide: BorderSide(
-														color: Color.fromARGB(255, 47,51,68)
-													)
-												),
-												focusedBorder: const OutlineInputBorder(
-													borderSide:BorderSide(
-														color: Color.fromARGB(255, 47,51,68)
-													)
-												),
-												labelText: "Senha",
-												prefixIcon: const Icon(Icons.lock),
-												prefixIconColor: const Color.fromARGB(255, 20,57,190),
-												suffixIcon: IconButton(
-													onPressed: (){
-														if(_ocult! == true){
-															setState(() {
-																iconSenha = Icons.visibility;	
-																_ocult = false;
-															});
-														}else{
-															setState(() {
-																iconSenha = Icons.visibility_off;	
-																_ocult = true;
-															});
-														}
-													},
-													icon: Icon(iconSenha)
-												),
-												suffixIconColor: const Color.fromARGB(255, 20,57,190)
+									TextField(
+										controller: password,
+										obscureText: _ocult!,
+										decoration: InputDecoration(
+											filled: true,
+											fillColor: const Color.fromARGB(255, 47,51,68),
+											border: const OutlineInputBorder(
+												borderRadius: BorderRadius.all(Radius.circular(10.0)),
 											),
+											enabledBorder: const OutlineInputBorder(
+												borderSide: BorderSide(
+													color: Color.fromARGB(255, 47,51,68)
+												)
+											),
+											focusedBorder: const OutlineInputBorder(
+												borderSide:BorderSide(
+													color: Color.fromARGB(255, 47,51,68)
+												)
+											),
+											labelText: "Senha",
+											prefixIcon: const Icon(Icons.lock),
+											prefixIconColor: const Color.fromARGB(255, 20,57,190),
+											errorText: errorPassword,
+											suffixIcon: IconButton(
+												onPressed: (){
+													if(_ocult! == true){
+														setState(() {
+															iconSenha = Icons.visibility;	
+															_ocult = false;
+														});
+													}else{
+														setState(() {
+															iconSenha = Icons.visibility_off;	
+															_ocult = true;
+														});
+													}
+												},
+												icon: Icon(iconSenha)
+											),
+											suffixIconColor: const Color.fromARGB(255, 20,57,190)
 										),
-									],
-								),
+									),
+								],
+							),
 						),
 						const Padding(padding: EdgeInsets.only(top: 30)),
 						ElevatedButton(
@@ -123,21 +137,43 @@ class _CadastroState extends State<Cadastro> {
 									Size(475, 49),
 								),
 							),
-							onPressed: (){
-								Navigator.pushNamed(
-									context, 
-									MyRoutes.perfil
-								);
+							onPressed: () async {
+								errorPassword = Auth().validaSenha(password.text);
+								
+								if(errorPassword == null){
+
+									String? error = await Auth().cadastra(
+										Autenticacao(
+											email: email.text, 
+											password: password.text
+										)
+									);
+									
+									setState(() {
+										errorEmail = error;
+									});
+
+									if(error == null){
+										Navigator.push(
+											context, 
+											MaterialPageRoute(
+												builder: (context) => PerfilPage(
+													email.text
+												)
+											)
+										);
+									}
+								}
 							}, 
 							child: const Text(
-								style: TextStyle(
+								style:  TextStyle(
 									color: Color.fromARGB(255, 255, 255, 255),
 								),
 								"Cadastrar"
 							),
 						),
 
-						const Padding(padding: EdgeInsets.only(top: 50)),
+						const Padding(padding:  EdgeInsets.only(top: 50)),
 
 						Row(
 							mainAxisAlignment: MainAxisAlignment.center,

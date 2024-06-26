@@ -8,6 +8,7 @@ class HomeHistorico extends StatefulWidget {
 }
 
 class _HomeHistoricoState extends State<HomeHistorico> {
+	
   @override
   Widget build(BuildContext context) {
     return const Center(

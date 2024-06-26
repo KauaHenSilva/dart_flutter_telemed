@@ -8,7 +8,6 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
 class _HomePageState extends State<HomePage> {
 	
   	@override
@@ -113,103 +112,93 @@ class _HomePageState extends State<HomePage> {
 						Column(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
-								GestureDetector(
-									onTap: (){
-										print("Em geral");
+									
+								ButtonHome(
+									funcao: (){
+										debugPrint("Em geral");
 									},
-									child: const ButtonHome(
-										name: "Em geral",
-										caminho: "assets/icons/em_geral.png",
-										paddingButton: EdgeInsets.only(top: 3,right: 5),
-									)
+									name: "Em geral",
+									caminho: "assets/icons/em_geral.png",
+									paddingButton: const EdgeInsets.only(top: 3,right: 5),
 								),
 								const Padding(padding: EdgeInsets.only(top: 10)),
-								GestureDetector(
-									onTap: (){
-										print("Pediatrico");
+									
+								ButtonHome(
+									funcao: (){
+										debugPrint("Pediatrico");
 									},
-									child: const ButtonHome(
-										name: "Pediátrico",
-										caminho: "assets/icons/pediatrico.png",
-										paddingButton: EdgeInsets.only(top: 5,right: 5),
-									)
+									name: "Pediátrico",
+									caminho: "assets/icons/pediatrico.png",
+									paddingButton: const EdgeInsets.only(top: 5,right: 5),
 								),
 							]
 						),
 						Column(
 							children: [
-								GestureDetector(
-									onTap: (){
-										print("Dentista");
+									
+								ButtonHome(
+									funcao: (){
+										debugPrint("Dentista");
 									},
-									child: const ButtonHome(
-										name: "Dentista",
-										caminho: "assets/icons/dentista.png",
-										paddingButton: EdgeInsets.only(top: 4,right: 4),
-									)
+									name: "Dentista",
+									caminho: "assets/icons/dentista.png",
+									paddingButton: const EdgeInsets.only(top: 4,right: 4),
 								),
 								const Padding(padding: EdgeInsets.only(top: 10)),
-								GestureDetector(
-									onTap: (){
-										print("Neurologista");
+									
+								ButtonHome(
+									funcao: (){
+										debugPrint("Neurologista");
 									},
-									child: const ButtonHome(
-										name: "Neurologista",
-										caminho: "assets/icons/neurologista.png",
-										paddingButton: EdgeInsets.only(top: 4,right: 5),
-									)
+									name: "Neurologista",
+									caminho: "assets/icons/neurologista.png",
+									paddingButton: const EdgeInsets.only(top: 4,right: 5),
 								),
 							]
 						),
 						Column(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
-								GestureDetector(
-									onTap: (){
-										print("Oftamologista");
+								ButtonHome(
+									funcao: (){
+										debugPrint("Oftamologista");
 									},
-									child: const ButtonHome(
-										name: "Oftalmológico",
-										caminho: "assets/icons/oftamologista.png",
-										paddingButton: EdgeInsets.only(top: 6,right: 5),
-									)
+									name: "Oftalmológico",
+									caminho: "assets/icons/oftamologista.png",
+									paddingButton: const EdgeInsets.only(top: 6,right: 5),
 								),
 								const Padding(padding: EdgeInsets.only(top: 10)),
-								GestureDetector(
-									onTap: (){
-										print("Farmaceutico");
+								ButtonHome(
+									funcao: (){
+										debugPrint("Farmaceutico");
 									},
-									child: const ButtonHome(
-										name: "Farmacêutico",
-										caminho: "assets/icons/farmaceutico.png",
-										paddingButton: EdgeInsets.only(top: 5,right: 4),
-									)
-								),
+									name: "Farmacêutico",
+									caminho: "assets/icons/farmaceutico.png",
+									paddingButton: const EdgeInsets.only(top: 5,right: 4),
+								)
 							]
 						),
 						Column(
 							mainAxisAlignment: MainAxisAlignment.spaceBetween,
 							children: [
-								GestureDetector(
-									onTap: (){
-										print("Nutrição");
+									
+								ButtonHome(
+									funcao: (){
+										debugPrint("Nutrição");
 									},
-									child: const ButtonHome(
-										name: "Nutrição",
-										caminho: "assets/icons/nutricao.png",
-										paddingButton: EdgeInsets.only(top: 4,right: 4),
-									)
+									name: "Nutrição",
+									caminho: "assets/icons/nutricao.png",
+									paddingButton: const EdgeInsets.only(top: 4,right: 4),
 								),
 								const Padding(padding: EdgeInsets.only(top: 10)),
-								GestureDetector(
-									onTap: (){
-										print("Mais");
+									
+								ButtonHome(
+									funcao: (){
+										debugPrint("Mais");
 									},
-									child: const ButtonHome(
-										name: "Mais...",
-										caminho: "assets/icons/mais.png",
-										paddingButton: EdgeInsets.only(top: 6,right: 6),
-									)
+									name: "Mais...",
+									caminho: "assets/icons/mais.png",
+									paddingButton: const EdgeInsets.only(top: 6,right: 6),
 								),
 							]
 						),
@@ -245,25 +234,25 @@ class _HomePageState extends State<HomePage> {
 							ButtonMedicos(
 								name: "Todos",
 								onPressed: (){
-									print("Todos");
+									debugPrint("Todos");
 								},
 							),
 							ButtonMedicos(
 								name: "Em Geral",
 								onPressed: (){
-									print("Em Geral");
+									debugPrint("Em Geral");
 								},
 							),
 							ButtonMedicos(
 								name: "Dentista",
 								onPressed: (){
-									print("Dentista");
+									debugPrint("Dentista");
 								},
 							),
 							ButtonMedicos(
 								name: "Nutricionista",
 								onPressed: (){
-									print("Nutricionista");
+									debugPrint("Nutricionista");
 								},
 							)
 						],

@@ -1,22 +1,77 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:telemed/screens/backend/auth.dart';
+import 'package:telemed/screens/backend/perfil.dart';
+import 'package:telemed/screens/backend/perfil_bend.dart';
 import 'package:telemed/screens/home/home_agendamento.dart';
 import 'package:telemed/screens/home/home_artigo.dart';
 import 'package:telemed/screens/home/home_historico.dart';
 import 'package:telemed/screens/home/home_page.dart';
 import 'package:telemed/screens/home/home_perfil.dart';
+import 'package:telemed/utils/my_routes.dart';
 
 class HomePrincipal extends StatefulWidget {
-  const HomePrincipal({super.key});
+  	final String? email;
 
-  @override
-  State<HomePrincipal> createState() => _HomePrincipalState();
+	const HomePrincipal(
+		this.email,
+		{super.key}
+	);
+
+  	@override
+  	State<HomePrincipal> createState() => _HomePrincipalState();
 }
 
 class _HomePrincipalState extends State<HomePrincipal> {
 	var _indexTela = 0;
-  
-	@override
 	
+	String? textDay;
+	String? nomeP = '';
+
+	String retornaHora(){
+		final data = DateTime.now();
+
+		if(data.hour >= 6 && data.hour <= 12){
+			return 'Bom dia👋';
+		}else if(data.hour >= 12 && data.hour <= 18){
+			return 'Boa Tarde👋';
+		}else if(data.hour >= 0 && data.hour <= 6){
+			return 'Boa Madrugada👋';
+		}else{
+			return 'Boa Noite👋';
+		}
+
+	}
+
+	Future<String> namePerfil() async {
+		List<Perfil> lista = await Perfilbend().recebePerfil();
+		
+		for(int i=0;i < lista.length;i++){
+			if(lista[i].email == widget.email!){
+				return lista[i].apelido;
+			}
+		}
+
+		return '';
+	}
+
+	void colocaPerfil()  async {
+		final nameT = await namePerfil();
+		
+		setState(() {
+			nomeP = nameT;
+		});
+	}
+
+	@override
+	void initState(){
+		super.initState();
+		
+		textDay = retornaHora();
+		colocaPerfil();
+	}
+
+	@override
 	Widget build(BuildContext context) {
 		var telas = [
 			const HomePage(),
@@ -25,6 +80,7 @@ class _HomePrincipalState extends State<HomePrincipal> {
 			const HomeArtigo(),
 			const HomePerfil()
 		];
+
 		return Scaffold(
 			backgroundColor: const Color.fromARGB(255,36,39,51),
 			appBar: AppBar(
@@ -33,25 +89,29 @@ class _HomePrincipalState extends State<HomePrincipal> {
 				title: Row(
 					mainAxisAlignment: MainAxisAlignment.spaceBetween,
 					children: <Widget>[
-						const Row(
+						Row(
 							children: [
-								CircleAvatar(
+								const CircleAvatar(
 									backgroundColor: Color.fromARGB(255, 100, 100, 100),
 								),
-								Padding(padding: EdgeInsets.only(left: 8)),
+								const Padding(padding: EdgeInsets.only(left: 8)),
 								Column(
 									children: <Widget>[
 										Text(
-											"Bom dia!",
-											style: TextStyle(
+											textDay!,
+											style: const TextStyle(
 												fontSize: 15
 											),
+											textAlign: TextAlign.center,
 										),
 										Text(
-											"Antonio Sales",
-											style: TextStyle(
-												fontSize: 15
+											nomeP!,
+											style: const TextStyle(
+												fontSize: 15,
+												fontWeight: FontWeight.w600,
+												color: Colors.white
 											),
+											textAlign: TextAlign.center,
 										)
 									],
 								),
@@ -71,6 +131,18 @@ class _HomePrincipalState extends State<HomePrincipal> {
 									}, 
 									icon: const Icon(Icons.favorite)
 								),
+								IconButton(
+									onPressed: (){
+										FirebaseAuth auth = FirebaseAuth.instance;
+
+										Auth().sair(auth);
+
+										Navigator.of(context).pushReplacementNamed(
+											MyRoutes.login
+										);
+									}, 
+									icon: const Icon(Icons.login_outlined)
+								)
 							],
 						)
 					],

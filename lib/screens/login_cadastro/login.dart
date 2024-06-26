@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:telemed/screens/backend/auth.dart';
+import 'package:telemed/screens/backend/classes_app.dart';
+import 'package:telemed/screens/home/home_navigation.dart';
 import 'package:telemed/utils/my_routes.dart';
 
 class Login extends StatefulWidget {
@@ -11,9 +14,14 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
 	bool? ocult = true;
 	IconData iconSenha = Icons.visibility_off;
+
+	String? errorEmail;
+	String? errorPassword;
+
+	TextEditingController email = TextEditingController();
+	TextEditingController password = TextEditingController();
   	
 	@override
-
   	Widget build(BuildContext context) {
 		final mediaQuery = MediaQuery.of(context);
 		final sizeTop = mediaQuery.size.height;
@@ -25,7 +33,7 @@ class _LoginState extends State<Login> {
 			),
 			backgroundColor: const Color.fromARGB(255,36,39,51),
 			body: SingleChildScrollView(
-				padding: EdgeInsets.only(top: sizeTop * 0.1,left: sizeWidth * 0.05,right: sizeWidth * 0.05),
+				padding: EdgeInsets.only(left: sizeWidth * 0.05,right: sizeWidth * 0.05),
 				child: Column(
 					children: [
 						Image.asset(
@@ -42,25 +50,27 @@ class _LoginState extends State<Login> {
 						const Padding(padding: EdgeInsets.only(top: 10)),
 						Column(
 							children: [
-								const TextField(
+								TextField(
+									controller: email,
 									decoration: InputDecoration(
 										filled: true,
-										fillColor: Color.fromARGB(255, 47,51,68),
-										border: OutlineInputBorder(
+										fillColor: const Color.fromARGB(255, 47,51,68),
+										border: const OutlineInputBorder(
 											borderRadius: BorderRadius.all(Radius.circular(10.0)),
 										),
-										enabledBorder: OutlineInputBorder(
+										enabledBorder: const OutlineInputBorder(
 											borderSide:BorderSide(
 												color: Color.fromARGB(255, 47,51,68)
 											)
 										),
-										focusedBorder: OutlineInputBorder(
+										focusedBorder: const OutlineInputBorder(
 											borderSide:BorderSide(
 												color: Color.fromARGB(255, 47,51,68)
 											)
 										),
-										prefixIcon: Icon(Icons.email),
-										prefixIconColor: Color.fromARGB(255, 20,57,190),
+										prefixIcon: const Icon(Icons.email),
+										errorText: errorEmail,
+										prefixIconColor: const Color.fromARGB(255, 20,57,190),
 										labelText: "E-mail",
 									),
 									
@@ -68,6 +78,7 @@ class _LoginState extends State<Login> {
 								const Padding(padding: EdgeInsets.only(top: 10)),
 
 								TextField(
+									controller: password,
 									obscureText: ocult!,
 									decoration: InputDecoration(
 										filled: true,
@@ -88,6 +99,7 @@ class _LoginState extends State<Login> {
 										labelText: "Senha",
 										prefixIcon: const Icon(Icons.lock),
 										prefixIconColor: const Color.fromARGB(255, 20,57,190),
+										errorText: errorPassword,
 										suffixIcon: IconButton(
 											onPressed: (){
 												if(ocult! == true){
@@ -121,11 +133,43 @@ class _LoginState extends State<Login> {
 									Size(475, 49),
 								),
 							),
-							onPressed: (){
-								Navigator.pushNamed(
-									context,
-									MyRoutes.homenavigation
+							onPressed: () async {
+								String? error = await Auth().entrar(
+									Autenticacao(
+										email: email.text, 
+										password: password.text
+									)
 								);
+
+								setState(() {
+									if(error == 'invalid-email'){
+										errorEmail = 'Error, Email Inválido!';
+									}else if(error == 'user-not-found'){
+										errorEmail = 'Error, este usuário não está cadastrado!';
+									}else if(error == 'user-disabled'){
+										errorEmail = 'Error, usuário está desabilitado!';
+									}else if(error == 'channel-error'){
+										errorEmail = 'Error, endereço de e-mail vazio!';
+									}else if(error == 'invalid-credential'){
+										errorEmail = 'Erro, credencial invalida';
+									}
+
+									if(error == 'wrong-password'){
+										errorPassword = 'Error, senha incorreta!';
+									}
+								});
+
+								if(error == null){
+									Navigator.push(
+										context, 
+										MaterialPageRoute(
+											builder: (context) => HomePrincipal(
+												email.text
+											)
+										)
+									);
+								}
+								
 							}, 
 							child: const Text(
 								style: TextStyle(
