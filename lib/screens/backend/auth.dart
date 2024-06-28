@@ -42,8 +42,6 @@ class Auth{
 
 		String? error;
 		
-		print("Email: " + conta.email);
-		print("Senha: " + conta.password);
 		try{
 			await auth.signInWithEmailAndPassword(
 				email: conta.email,

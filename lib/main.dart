@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:telemed/screens/backend/auth.dart';
 import 'package:telemed/screens/backend/perfil_bend.dart';
+import 'package:telemed/screens/backend/save_page.dart';
 import 'package:telemed/screens/home/home_navigation.dart';
 import 'package:telemed/screens/login_cadastro/cadastro.dart';
 import 'package:telemed/screens/login_cadastro/login.dart';
+import 'package:telemed/screens/login_cadastro/perfil_page.dart';
 import 'package:telemed/utils/my_routes.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -23,25 +25,48 @@ void main() async {
   	runApp(const MyApp());
 }
 
-Widget paginaInicial() {
+Widget paginaInicial(String? route) {
 	FirebaseAuth auth = FirebaseAuth.instance;
 
 	User? cliente = auth.currentUser;
 
-	if(cliente != null){
-		return HomePrincipal(
-			cliente.email
-		);
-	}else{
-		return const Login();
+	if (route != null) {
+      	return const PerfilPage();
+    }else{
+		if(cliente != null){
+			return const HomePrincipal();
+		}else{
+			return const Login();
+		}
 	}
+
 }
 
-class MyApp extends StatelessWidget {
-	const MyApp({super.key});
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+	late Future<String?> _initialRoute;
+	String? rota;
 
 	@override
-	Widget build(BuildContext context) {
+	void initState() {
+		super.initState();
+		_initialRoute = NavigationState().getCurrentRoute();
+		_initialRoute.then((value) {
+			setState(() {
+				rota = value;
+			});
+		});
+	}
+
+  	@override
+  	Widget build(BuildContext context) {
+
 		return MultiProvider(
 			providers: [
 				Provider(
@@ -65,10 +90,11 @@ class MyApp extends StatelessWidget {
 				theme: ThemeData.light(),
 				darkTheme: ThemeData.dark(),
 				routes: {
-					MyRoutes.home: (ctx) => paginaInicial(),
-					// MyRoutes.home: (ctx) => const Login(),
+					MyRoutes.home: (ctx) => paginaInicial(rota),
 					MyRoutes.cadastro : (ctx) => const Cadastro(),
 					MyRoutes.login : (ctx) => const Login(),
+					MyRoutes.perfil : (ctx) => const PerfilPage(),
+					MyRoutes.homeprincipal : (ctx) => const HomePrincipal()
 				},
 			),
 		);

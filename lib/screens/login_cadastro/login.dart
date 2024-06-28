@@ -160,12 +160,10 @@ class _LoginState extends State<Login> {
 								});
 
 								if(error == null){
-									Navigator.push(
+									Navigator.pushReplacement(
 										context, 
 										MaterialPageRoute(
-											builder: (context) => HomePrincipal(
-												email.text
-											)
+											builder: (context) => const HomePrincipal()
 										)
 									);
 								}

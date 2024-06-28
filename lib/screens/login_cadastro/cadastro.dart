@@ -154,13 +154,12 @@ class _CadastroState extends State<Cadastro> {
 									});
 
 									if(error == null){
-										Navigator.push(
+										Navigator.pushAndRemoveUntil(
 											context, 
 											MaterialPageRoute(
-												builder: (context) => PerfilPage(
-													email.text
-												)
-											)
+												builder: (context) => const PerfilPage()
+											),
+											(Route<dynamic> route) => false,
 										);
 									}
 								}

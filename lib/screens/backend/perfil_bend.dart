@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:telemed/data/perfil_data.dart';
 import 'package:telemed/screens/backend/perfil.dart';
 import 'package:http/http.dart' as http;
 
@@ -19,7 +18,6 @@ class Perfilbend{
 		);
 
 		addPerfil(perfil);
-		dados = perfil;
 	}
 
 	void addPerfil(Perfil perfil){

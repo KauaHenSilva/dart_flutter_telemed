@@ -1,17 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:telemed/screens/backend/perfil.dart';
 import 'package:telemed/screens/backend/perfil_bend.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:telemed/screens/backend/save_page.dart';
 import 'package:telemed/screens/home/home_navigation.dart';
+import 'package:telemed/utils/my_routes.dart';
 
 class PerfilPage extends StatefulWidget {
-	final String? email;
+	const PerfilPage({super.key});
 
-  	const PerfilPage(this.email, {super.key});
-
-  @override
-  State<PerfilPage> createState() => _PerfilPageState();
+	@override
+  	State<PerfilPage> createState() => _PerfilPageState();
 }
 
 class _PerfilPageState extends State<PerfilPage> {
@@ -27,7 +28,13 @@ class _PerfilPageState extends State<PerfilPage> {
 	@override
 	void initState() {
 		super.initState();
-		_controllerEmail = TextEditingController(text: widget.email);
+
+		FirebaseAuth auth = FirebaseAuth.instance;
+		_controllerEmail = TextEditingController(text: auth.currentUser!.email);
+
+		NavigationState().saveCurrentRoute(
+			MyRoutes.perfil
+		);
 	}
 
 	@override
@@ -91,7 +98,7 @@ class _PerfilPageState extends State<PerfilPage> {
 		}
 
 		final mediaQuery = MediaQuery.of(context);
-		final sizeTop = mediaQuery.size.height;
+		// final sizeTop = mediaQuery.size.height;
 		final sizeWidth = mediaQuery.size.width;		
 
 		return Scaffold(
@@ -100,8 +107,8 @@ class _PerfilPageState extends State<PerfilPage> {
 			),
 			backgroundColor: const Color.fromARGB(255,36,39,51),
 			body: Container(
-				margin: const EdgeInsets.all(5),
-				padding: EdgeInsets.only(top: sizeTop * 0.06,left: sizeWidth * 0.05,right: sizeWidth * 0.05),
+				margin: const EdgeInsets.only(left: 5,right: 5),
+				padding: EdgeInsets.only(left: sizeWidth * 0.05,right: sizeWidth * 0.05),
 				child: SingleChildScrollView(
 					child: Column(
 						crossAxisAlignment: CrossAxisAlignment.center,
@@ -368,7 +375,7 @@ class _PerfilPageState extends State<PerfilPage> {
 													child: Text('Feminino')
 												),
 												DropdownMenuItem(
-													value: "Gay",
+													value: "Outro",
 													child: Text('Outros')
 												),
 											],
@@ -384,13 +391,14 @@ class _PerfilPageState extends State<PerfilPage> {
 									bool result = _submitForm();
 									
 									if(result){
-										Navigator.push(
+										NavigationState().clearCurrentRoute();
+
+										Navigator.pushAndRemoveUntil(
 											context, 
 											MaterialPageRoute(
-												builder: (context) => HomePrincipal(
-													widget.email
-												)
-											)
+												builder: (context) => const HomePrincipal()
+											),
+											(Route<dynamic> route) => false,
 										);
 									}
 								}, 

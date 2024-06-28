@@ -11,10 +11,8 @@ import 'package:telemed/screens/home/home_perfil.dart';
 import 'package:telemed/utils/my_routes.dart';
 
 class HomePrincipal extends StatefulWidget {
-  	final String? email;
 
 	const HomePrincipal(
-		this.email,
 		{super.key}
 	);
 
@@ -45,9 +43,10 @@ class _HomePrincipalState extends State<HomePrincipal> {
 
 	Future<String> namePerfil() async {
 		List<Perfil> lista = await Perfilbend().recebePerfil();
-		
+		FirebaseAuth auth = FirebaseAuth.instance;
+
 		for(int i=0;i < lista.length;i++){
-			if(lista[i].email == widget.email!){
+			if(lista[i].email == auth.currentUser!.email){
 				return lista[i].apelido;
 			}
 		}
@@ -58,9 +57,11 @@ class _HomePrincipalState extends State<HomePrincipal> {
 	void colocaPerfil()  async {
 		final nameT = await namePerfil();
 		
-		setState(() {
-			nomeP = nameT;
-		});
+		if(mounted){
+			setState(() {
+				nomeP = nameT;
+			});
+		}
 	}
 
 	@override
