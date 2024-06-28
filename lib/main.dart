@@ -27,6 +27,8 @@ void main() async {
 
 Widget paginaInicial(String? route) {
 	FirebaseAuth auth = FirebaseAuth.instance;
+	
+	NavigationState().clearCurrentRoute();
 
 	User? cliente = auth.currentUser;
 

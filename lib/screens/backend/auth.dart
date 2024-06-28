@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:telemed/screens/backend/classes_app.dart';
 
-class Auth{
+class Auth {
 
 	String? validaSenha(String password){
 		final senha = password;
@@ -65,15 +65,10 @@ class Auth{
 			);
 			error = null;
 		}on FirebaseAuthException catch (e){
-			if(e.code == 'email-already-in-use'){
-				error = 'Error, este e-mail já possui uma conta!';
-			}else if(e.code == 'invalid-email'){
-				error = 'Error, endereço de e-mail inválido!';
-			}else if(e.code == 'channel-error'){
-				error = 'Error, endereço de e-mail vazio!';
-			}
+			error = e.code;
+			
 		}
-
+		
 		return error;
 	}
 

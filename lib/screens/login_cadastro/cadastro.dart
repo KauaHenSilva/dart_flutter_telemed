@@ -138,30 +138,36 @@ class _CadastroState extends State<Cadastro> {
 								),
 							),
 							onPressed: () async {
-								errorPassword = Auth().validaSenha(password.text);
 								
-								if(errorPassword == null){
 
-									String? error = await Auth().cadastra(
-										Autenticacao(
-											email: email.text, 
-											password: password.text
-										)
-									);
-									
-									setState(() {
-										errorEmail = error;
-									});
+								String? error = await Auth().cadastra(
+									Autenticacao(
+										email: email.text, 
+										password: password.text
+									)
+								);
+								
+								setState(() {
+									errorPassword =  Auth().validaSenha(password.text);
 
-									if(error == null){
-										Navigator.pushAndRemoveUntil(
-											context, 
-											MaterialPageRoute(
-												builder: (context) => const PerfilPage()
-											),
-											(Route<dynamic> route) => false,
-										);
+									if(error == 'email-already-in-use'){
+										errorEmail = 'Error, este e-mail já possui uma conta!';
+									}else if(error == 'invalid-email'){
+										errorEmail = 'Error, endereço de e-mail inválido!';
+									}else if(error == 'missing-email'){
+										errorEmail = 'Error, endereço de e-mail vazio!';
 									}
+									
+								});
+
+								if(error == null){
+									Navigator.pushAndRemoveUntil(
+										context, 
+										MaterialPageRoute(
+											builder: (context) => const PerfilPage()
+										),
+										(Route<dynamic> route) => false,
+									);
 								}
 							}, 
 							child: const Text(

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:telemed/screens/backend/perfil.dart';
 import 'package:http/http.dart' as http;
 
-class Perfilbend{
+class Perfilbend {
 	final _url = "https://telemed-f4e7e-default-rtdb.firebaseio.com/";
 
 	void savePerfil(Map<String, Object> data){
@@ -33,6 +33,7 @@ class Perfilbend{
 				},
 			),
 		);
+
 	}
 
 	Future<List<Perfil>> recebePerfil() async {

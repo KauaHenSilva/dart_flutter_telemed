@@ -101,7 +101,8 @@ class _HomePrincipalState extends State<HomePrincipal> {
 										Text(
 											textDay!,
 											style: const TextStyle(
-												fontSize: 15
+												fontSize: 15,
+												color: Colors.white 
 											),
 											textAlign: TextAlign.center,
 										),
@@ -124,13 +125,23 @@ class _HomePrincipalState extends State<HomePrincipal> {
 									onPressed: (){
 										
 									}, 
-									icon: const Icon(Icons.notifications)
+									icon: const Icon(Icons.notifications),
+									style: const ButtonStyle(
+										iconColor: WidgetStatePropertyAll(
+											Colors.white
+										)
+									),
 								),
 								IconButton(
 									onPressed: (){
 										
 									}, 
-									icon: const Icon(Icons.favorite)
+									icon: const Icon(Icons.favorite),
+									style: const ButtonStyle(
+										iconColor: WidgetStatePropertyAll(
+											Colors.white
+										)
+									),
 								),
 								IconButton(
 									onPressed: (){
