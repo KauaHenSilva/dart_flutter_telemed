@@ -123,7 +123,7 @@ class _HomePrincipalState extends State<HomePrincipal> {
 							children: [
 								IconButton(
 									onPressed: (){
-										
+                    Navigator.of(context).pushNamed(MyRoutes.notification);
 									}, 
 									icon: const Icon(Icons.notifications),
 									style: const ButtonStyle(

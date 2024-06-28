@@ -9,6 +9,7 @@ import 'package:telemed/screens/home/home_navigation.dart';
 import 'package:telemed/screens/login_cadastro/cadastro.dart';
 import 'package:telemed/screens/login_cadastro/login.dart';
 import 'package:telemed/screens/login_cadastro/perfil_page.dart';
+import 'package:telemed/screens/notificationScreen/notification_screen.dart';
 import 'package:telemed/utils/my_routes.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -114,6 +115,7 @@ class _MyAppState extends State<MyApp> {
           MyRoutes.perfil: (ctx) => const PerfilPage(),
           MyRoutes.homeprincipal: (ctx) => const HomePrincipal(),
           MyRoutes.favorite: (ctx) => const FavoritePage(),
+          MyRoutes.notification: (ctx) => const NotificationScreen(),
         },
       ),
     );
