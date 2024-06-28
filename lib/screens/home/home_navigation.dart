@@ -134,7 +134,7 @@ class _HomePrincipalState extends State<HomePrincipal> {
 								),
 								IconButton(
 									onPressed: (){
-										
+										Navigator.of(context).pushNamed(MyRoutes.favorite);
 									}, 
 									icon: const Icon(Icons.favorite),
 									style: const ButtonStyle(
