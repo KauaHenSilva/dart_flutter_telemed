@@ -30,13 +30,13 @@ class _HomePrincipalState extends State<HomePrincipal> {
 		final data = DateTime.now();
 
 		if(data.hour >= 6 && data.hour <= 12){
-			return 'Bom dia👋';
+			return 'Bom dia';
 		}else if(data.hour >= 12 && data.hour <= 18){
-			return 'Boa Tarde👋';
+			return 'Boa Tarde';
 		}else if(data.hour >= 0 && data.hour <= 6){
-			return 'Boa Madrugada👋';
+			return 'Boa Madrugada';
 		}else{
-			return 'Boa Noite👋';
+			return 'Boa Noite';
 		}
 
 	}

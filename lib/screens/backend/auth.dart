@@ -14,10 +14,6 @@ class Auth {
 			return 'Senha pequena, tem que ter no minimo 8 caracteres';
 		}
 
-		if(!senha.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))){
-			return 'Senha tem que possuir pelo menos um caractere especial';
-		}
-
 		int upper = RegExp(r'[A-Z]').allMatches(senha).length;
 		int lower = RegExp(r'[a-z]').allMatches(senha).length;
 
