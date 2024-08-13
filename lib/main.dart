@@ -6,6 +6,7 @@ import 'package:telemed/screens/backend/perfil_bend.dart';
 import 'package:telemed/screens/backend/save_page.dart';
 import 'package:telemed/screens/favoriteScreen/favorite_page.dart';
 import 'package:telemed/screens/home/home_navigation.dart';
+import 'package:telemed/screens/introScreen/init_page.dart';
 import 'package:telemed/screens/login_cadastro/cadastro.dart';
 import 'package:telemed/screens/login_cadastro/login.dart';
 import 'package:telemed/screens/login_cadastro/perfil_page.dart';
@@ -108,7 +109,9 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
+        initialRoute: MyRoutes.welcome,
         routes: {
+          MyRoutes.welcome: (ctx) => const InitPage(),
           MyRoutes.home: (ctx) => paginaInicial(rota),
           MyRoutes.cadastro: (ctx) => const Cadastro(),
           MyRoutes.login: (ctx) => const Login(),

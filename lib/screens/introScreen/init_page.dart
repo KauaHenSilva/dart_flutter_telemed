@@ -47,35 +47,41 @@ class _InitPageState extends State<InitPage> {
                   },
                   children: [
                     ImagePeople(
-                      size:  size.height > 800 ? size.height * 0.8 : size.height * 0.9,
+                      size: size.height > 800
+                          ? size.height * 0.8
+                          : size.height * 0.9,
                       image: "assets/medic/medic1.png",
                       sizebottom: 0,
                     ),
                     ImagePeople(
-                      size: size.height > 800 ? size.height * 0.8 : size.height * 0.9,
+                      size: size.height > 800
+                          ? size.height * 0.8
+                          : size.height * 0.9,
                       image: "assets/medic/medic2.png",
                       sizebottom: 0,
                     ),
                     ImagePeople(
-                      size: size.height > 800 ? size.height * 0.7 : size.height * 0.8,
+                      size: size.height > 800
+                          ? size.height * 0.7
+                          : size.height * 0.8,
                       image: "assets/medic/medic3.png",
                       sizebottom: size.height * 0.1,
                     ),
                   ],
                 ),
-                Positioned(
+                if (currentPage > 0)
+                  Positioned(
                     top: 30,
                     left: 10,
                     child: ReButton(
                       onPressed: () {
-                        (currentPage > 0)
-                            ? _controller.previousPage(
-                                duration: const Duration(milliseconds: 400),
-                                curve: Curves.easeOut,
-                              )
-                            : Navigator.pushNamed(context, MyRoutes.welcome);
+                        _controller.previousPage(
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.easeOut,
+                        );
                       },
-                    )),
+                    ),
+                  ),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -98,7 +104,8 @@ class _InitPageState extends State<InitPage> {
                           duration: const Duration(milliseconds: 100),
                           transitionBuilder:
                               (Widget child, Animation<double> animation) {
-                            return FadeTransition(opacity: animation, child: child);
+                            return FadeTransition(
+                                opacity: animation, child: child);
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
